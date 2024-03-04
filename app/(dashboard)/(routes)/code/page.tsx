@@ -47,7 +47,7 @@ const CodePage = () => {
             messages: newMessages,
         });
 
-        setMessages((current) => [...current, userMessage, response.data]);
+        setMessages((current) => [...current,response.data, userMessage]);
 
         form.reset();
       } catch (error: any) {
