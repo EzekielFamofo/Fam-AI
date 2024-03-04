@@ -3,6 +3,7 @@
 import axios from "axios";
 import { useState } from "react";
 import { Check, Zap } from "lucide-react";
+import { toast } from "react-hot-toast";
 
 import { 
   Dialog, 
@@ -18,7 +19,6 @@ import { useProModal } from "@/hooks/use-pro-modal";
 import { tools } from "@/constants";
 import { Card } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
-import toast from "react-hot-toast";
 
 export const ProModal = () => {
   const proModal = useProModal();
@@ -29,10 +29,9 @@ export const ProModal = () => {
       setLoading(true);
       const response = await axios.get("/api/stripe");
 
-      window.location.href = (await response).data.url;
+      window.location.href = response.data.url;
     } catch (error) {
-        toast.error("SOmething went wrong")
-        console.log(error, "STRIPE_CLIENT_ERROR");
+      toast.error("Something went wrong");
     } finally {
       setLoading(false);
     }
@@ -44,7 +43,7 @@ export const ProModal = () => {
         <DialogHeader>
           <DialogTitle className="flex justify-center items-center flex-col gap-y-4 pb-2">
             <div className="flex items-center gap-x-2 font-bold text-xl">
-              Upgrade to Fam AI
+              Upgrade to Genius
               <Badge variant="premium" className="uppercase text-sm py-1">
                 pro
               </Badge>
